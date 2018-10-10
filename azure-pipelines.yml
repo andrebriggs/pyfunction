@@ -72,8 +72,7 @@ jobs:
   - task: AzureCLI@1
     inputs:
       #azureSubscription: #'cseHackConnection'
-      azureConnectionType: 'Azure Resource Manager'
-      connectedServiceNameARM: cseHackConnection
+      #connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
         az storage blob upload --container-name function-releases --name helloworld --file helloworld
