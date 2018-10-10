@@ -52,11 +52,11 @@ jobs:
 #  pool:
 #    vmImage: 'Ubuntu 16.04'
 
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.x'
-      architecture: 'x64'
+#  steps:
+#  - task: UsePythonVersion@0
+#    inputs:
+#      versionSpec: '3.x'
+#      architecture: 'x64'
 
 # This will package up our function and retain the build artifact
   - script: python setup.py sdist
