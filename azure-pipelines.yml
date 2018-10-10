@@ -71,7 +71,7 @@ jobs:
 
   - task: AzureCLI@1
     inputs:
-      #azureSubscription: #'cseHackConnection'
+      azureSubscription: cseHackConnection
       #connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
