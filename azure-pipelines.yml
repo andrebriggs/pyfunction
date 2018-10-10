@@ -58,10 +58,11 @@ jobs:
 #      versionSpec: '3.x'
 #      architecture: 'x64'
 
-# This will package up our function and retain the build artifact
-  - script: python setup.py sdist
+# This will package up our function in a zip. if we don't specify the format the default is tar gz
+  - script: python setup.py sdist --formats=zip
     displayName: 'Build sdist'
 
+# This will retain the build artifact
   - task: PublishBuildArtifacts@1
     displayName: 'Publish artifact: dist'
     inputs:
