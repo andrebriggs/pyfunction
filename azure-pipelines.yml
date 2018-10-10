@@ -72,6 +72,7 @@ jobs:
   - task: AzureCLI@1
     inputs:
       #azureSubscription: #'cseHackConnection'
+      azureConnectionType: 'Azure Resource Manager'
       connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
