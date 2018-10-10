@@ -73,4 +73,5 @@ jobs:
     inputs:
       azureSubscription: 'cseHackConnection'
       scriptLocation: 'inlineScript'
-      inlineScript: 'az storage blob upload --container-name function-releases --name helloworld --file helloworld'
+      inlineScript:  |
+        az storage blob upload --container-name function-releases --name helloworld --file helloworld
