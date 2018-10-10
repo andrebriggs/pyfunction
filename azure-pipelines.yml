@@ -71,7 +71,7 @@ jobs:
 
   - task: AzureCLI@1
     inputs:
-      azureSubscription: 'cseHackConnection'
+      azureSubscription: #'cseHackConnection'
       scriptLocation: 'inlineScript'
       inlineScript:  |
         az storage blob upload --container-name function-releases --name helloworld --file helloworld
