@@ -71,8 +71,8 @@ jobs:
 
   - task: AzureCLI@1
     inputs:
-      azureSubscription: #'cseHackConnection'
-      connectedServiceNameARM: AP Efficiency Analysis - R+D (e146303f-d8ed-43f0-b681-5b31fdac5c39)
+      #azureSubscription: #'cseHackConnection'
+      connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
         az storage blob upload --container-name function-releases --name helloworld --file helloworld
