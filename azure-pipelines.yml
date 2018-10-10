@@ -75,4 +75,4 @@ jobs:
       #connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
-        az storage blob upload --container-name function-releases --name helloworld --file helloworld
+        az storage blob upload --container-name function-releases --name helloworld --file helloworld --account-name csehackstorage --account-key $(secret.AzureStorageKey)
