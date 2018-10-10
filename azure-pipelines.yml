@@ -69,7 +69,7 @@ jobs:
       pathtoPublish: 'dist'
       artifactName: 'dist'
 
-  - task: AzureCLI@2
+  - task: AzureCLI@1
     inputs:
       azureSubscription: 'e146303f-d8ed-43f0-b681-5b31fdac5c39'
       scriptLocation: 'inlineScript'
