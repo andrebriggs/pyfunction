@@ -75,4 +75,4 @@ jobs:
       #connectedServiceNameARM: cseHackConnection
       scriptLocation: 'inlineScript'
       inlineScript:  |
-        az storage blob upload --container-name function-releases --name helloworld --file helloworld --account-name csehackstorage --account-key $(secret.AzureStorageKey)
+        az storage blob upload --container-name function-releases --name pyfunction-0.1dev.zip --file dist/pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
