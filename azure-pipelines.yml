@@ -26,9 +26,16 @@ jobs:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
+# This should install all the azure functions deps defined the requirements.txt.
   - script: python -m pip install --upgrade pip && pip install -r requirements.txt
     displayName: 'Install dependencies'
 
+# We want to make sure that the python syntax is correct. 
+# Hence we run lint test. No point in deploying if incorrect.
+  - script: |
+    python -m pip install flake8
+    flake8 .
+  displayName: 'Run lint tests'
 #  - script: |
 #      pip install pytest
  #     pytest tests --doctest-modules --junitxml=junit/test-results.xml
@@ -40,10 +47,10 @@ jobs:
 #      testRunTitle: 'Python $(python.version)'
 #    condition: succeededOrFailed()
 
-- job: 'Publish'
-  dependsOn: 'Test'
-  pool:
-    vmImage: 'Ubuntu 16.04'
+# - job: 'Publish'
+#  dependsOn: 'Test'
+#  pool:
+#    vmImage: 'Ubuntu 16.04'
 
   steps:
   - task: UsePythonVersion@0
@@ -51,5 +58,12 @@ jobs:
       versionSpec: '3.x'
       architecture: 'x64'
 
+# This will package up our function and retain the build artifact
   - script: python setup.py sdist
     displayName: 'Build sdist'
+
+  - task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact: dist'
+  inputs:
+    pathtoPublish: 'dist'
+    artifactName: 'dist'
