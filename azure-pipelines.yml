@@ -63,7 +63,7 @@ jobs:
     displayName: 'Build sdist'
 
   - task: PublishBuildArtifacts@1
-  displayName: 'Publish artifact: dist'
-  inputs:
-    pathtoPublish: 'dist'
-    artifactName: 'dist'
+    displayName: 'Publish artifact: dist'
+    inputs:
+      pathtoPublish: 'dist'
+      artifactName: 'dist'
