@@ -75,15 +75,15 @@ jobs:
       scriptLocation: 'inlineScript'
       inlineScript:  |
         az storage blob upload --container-name function-releases --name $(Build.BuildNumber)-pyfunction-0.1dev.zip --file dist/pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
-        az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
+#        az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
 
 
-#  - task: AzureCLI@2 
-#    inputs: 
-#        azureSubscription: cseHackConnection 
-#        scriptLocation: 'inlineScript' 
-#        inlineScript: | 
-#          az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
+  - task: AzureCLI@2 
+    inputs: 
+        azureSubscription: cseHackConnection 
+        scriptLocation: 'inlineScript' 
+        inlineScript: | 
+          az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
 
   - task: Bash@3
     inputs:
