@@ -83,7 +83,7 @@ jobs:
         azureSubscription: cseHackConnection 
         scriptLocation: 'inlineScript' 
         inlineScript: | 
-          az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip --account-name csehackstorage --account-key $(secret.AzureStorageKey)
+          az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=$(Build.BuildNumber)-pyfunction-0.1dev.zip
 
   - task: Bash@3
     inputs:
