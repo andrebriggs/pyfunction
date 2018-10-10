@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Functions Host",
+      "identifier": "runFunctionsHost",
+      "type": "shell",
+      "osx": {
+        "command": "func extensions install && . func_env/bin/activate && func host start"
+      },
+      "windows": {
+        "command": "func extensions install ; func_env/Scripts/activate ; func host start"
+      },
+      "linux": {
+        "command": "func extensions install && . func_env/bin/activate && func host start"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always"
+      },
+      "options": {
+        "env": {
+          "languageWorkers:python:arguments": "-m ptvsd --server --port 9091 --file"
+        }
+      },
+      "problemMatcher": "$func-watch"
+    },
+    {
+      "label": "funcPack",
+      "identifier": "funcPack",
+      "type": "shell",
+      "osx": {
+        "command": ". func_env/bin/activate && func pack"
+      },
+      "windows": {
+        "command": "func_env/Scripts/activate ; func pack"
+      },
+      "linux": {
+        "command": ". func_env/bin/activate && func pack"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

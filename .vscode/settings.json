@@ -1,0 +1,8 @@
+{
+  "azureFunctions.projectRuntime": "~2",
+  "azureFunctions.projectLanguage": "Python",
+  "azureFunctions.templateFilter": "Verified",
+  "azureFunctions.deploySubpath": "pyfunction.zip",
+  "azureFunctions.preDeployTask": "funcPack",
+  "python.pythonPath": "func_env/bin/python"
+}
