@@ -15,8 +15,12 @@ before_install:
   - sudo apt-get update && sudo apt-get install -y azure-cli
   - npm i -g azure-functions-core-tools --unsafe-perm true
 
-script:
+install:
   - python -m pip install flake8
+
+before_script:
   - flake8 .
+
+script: 
   - az login --service-principal --username "$APP_ID" --password "$PASSWORD" --tenant "$TENANT_ID"
   - az account get-access-token --query "accessToken" | func azure functionapp publish $APP_NAME --build-native-deps
