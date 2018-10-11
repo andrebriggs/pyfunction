@@ -17,5 +17,9 @@ before_install:
 
 
 script:
+  - python -m pip install flake8
+  - flake8 .
+
+script:
   - az login --service-principal --username "$APP_ID" --password "$PASSWORD" --tenant "$TENANT_ID"
-  - az account get-access-token --query "accessToken" | func azure functionapp publish $APP_NAME --build-native-deps #--settings FUNCTIONS_WORKER_RUNTIME=python
+  - az account get-access-token --query "accessToken" | func azure functionapp publish $APP_NAME --build-native-deps
