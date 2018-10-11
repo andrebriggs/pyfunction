@@ -1,8 +1,8 @@
 import logging
 import json
 
+import utilities  
 import azure.functions as func
-
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -15,13 +15,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             pass
         else:
             imageCount = req_body.get('imageCount')
-    
-    data = {}
-    data['key'] = 'value'
-    json_data = json.dumps(data)
-
+            
     if imageCount:
-        return func.HttpResponse(json_data)
+        return func.HttpResponse(utilities.getUrls())
         #return func.HttpResponse(f"You requested {imageCount} images!")
     else:
         return func.HttpResponse(
