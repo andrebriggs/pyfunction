@@ -1,7 +1,6 @@
 import logging
 import json
-
-import utilities  
+import utilities
 import azure.functions as func
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -18,7 +17,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             
     if imageCount:
         return func.HttpResponse(utilities.getUrls())
-        #return func.HttpResponse(f"You requested {imageCount} images!")
     else:
         return func.HttpResponse(
              "Please pass a name on the query string or in the request body",
