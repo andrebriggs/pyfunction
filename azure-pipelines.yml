@@ -85,6 +85,6 @@ jobs:
         inlineScript: | 
           #az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=https://csehackstorage.blob.core.windows.net/function-releases/$(Build.BuildNumber)-pyfunction-0.1dev.zip
           az functionapp config appsettings set -g CSEHack -n csehacklinux --settings WEBSITE_RUN_FROM_ZIP=https://csehackstorage.blob.core.windows.net/function-releases/20181010062508-aae64a6d-7204-460c-ba39-e487d3574629.zip
-  - task: Bash@3
-    inputs:
-      scripts: curl -G https://csehacklinux.azurewebsites.net/api/HttpTriggerPython -d name=oneweek
+ # - task: Bash@3
+ #   inputs:
+ #     scripts: curl -G https://csehacklinux.azurewebsites.net/api/HttpTriggerPython -d name=oneweek
