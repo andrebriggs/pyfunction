@@ -16,7 +16,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             imageCount = req_body.get('imageCount')
             
     if imageCount:
-        return func.HttpResponse(utilities.getUrls())
+        images = utilities.getImageDictionary(int(imageCount))
+        json_data = json.dumps(images)
+        return func.HttpResponse(json_data)
     else:
         return func.HttpResponse(
              "Please pass a name on the query string or in the request body",
