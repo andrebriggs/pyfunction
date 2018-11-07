@@ -39,7 +39,7 @@ def get_untagged_images(num):
 
     # GET N existing UNTAGGED rows
     selected_images_to_tag = {}
-    cursor.execute("SELECT b.ImageId, b.ImageName, a.TagStateId FROM Image_Tagging a JOIN Image_Info b ON a.ImageId = b.ImageId WHERE a.TagStateId = 0 order by a.createddtim DESC limit {0}".format(num))
+    cursor.execute("SELECT b.ImageId, b.originalimagename, a.TagStateId FROM Image_Tagging_state a JOIN Image_Info b ON a.ImageId = b.ImageId WHERE a.TagStateId = 0 order by a.createddtim DESC limit {0}".format(num))
     for row in cursor:
         print('Image Id: {0} \t\tImage Name: {1} \t\tTag State: {2}'.format(row[0], row[1], row[2]))
         selected_images_to_tag[str(row[0])] = str(row[1])
