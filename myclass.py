@@ -228,20 +228,47 @@ class ImageTagDataAccess(object):
                 raise 
             finally: conn.close()
 
+    def update_tagged_images_v2(self,list_of_image_tags):
+        if(not list_of_image_tags):
+            return  
+        try:
+            conn = self._db_provider.get_connection()
+            try:
+                cursor = conn.cursor() 
+                for img_tag in list(list_of_image_tags):
+                    query = ("with iti AS ( "
+                            "INSERT INTO image_tags (ImageId, x_min,x_max,y_min,y_max) "
+                            "VALUES ({0}, {1},{2},{3},{4}) "
+                            "RETURNING ImageTagId), "
+                            "ci AS ( "
+                                "INSERT INTO classification_info (ClassificationName) "
+                                "VALUES {5} "
+                                "ON CONFLICT (ClassificationName) DO UPDATE SET ClassificationName=EXCLUDED.ClassificationName "
+                                "RETURNING (SELECT iti.ImageTagId FROM iti), ClassificationId) "
+                            "INSERT INTO tags_classification (ImageTagId,ClassificationId) "
+                            "SELECT imagetagid,classificationid from ci;")
+                    classifications = ", ".join("('{0}')".format(name) for name in img_tag.classification_names)                       
+                    cursor.execute(query.format(img_tag.image_id,img_tag.x_min,img_tag.x_max,img_tag.y_min,img_tag.y_max,classifications))
+                    conn.commit()
+            finally: cursor.close()
+        except Exception as e: 
+            print("An errors occured updating tagged image: {0}".format(e))
+            raise 
+        finally: conn.close()
+
 def main():
-    db_config = DatabaseInfo("abrig-db.postgres.database.azure.com","pluto","abrigtest@abrig-db","abcdABCD123")
+    db_config = DatabaseInfo("","","","")
     data_access = ImageTagDataAccess(PostGresProvider(db_config))
     data_access.test_connection()
     user_id = data_access.create_user('James')
     print("The user id is {0}".format(user_id))
 
     list_of_image_infos = generate_test_image_infos(5)
-    data_access.add_new_images(list_of_image_infos,user_id)
+    url_to_image_id_map = data_access.add_new_images(list_of_image_infos,user_id)
 
-    image_tags = generate_test_image_tags([1,2,3,4,5],4,4)
+    image_tags = generate_test_image_tags(list(url_to_image_id_map.values()),4,4)
+    data_access.update_tagged_images_v2(image_tags)
 
-    #data_access.get_new_images(5, user_id)
-    #data_access.test_connection()
 
 CLASSIFICATIONS = ("maine coon","german shephard","goldfinch","mackerel"," african elephant","rattlesnake")
 
